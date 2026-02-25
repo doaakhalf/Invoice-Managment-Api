@@ -1,0 +1,53 @@
+<?php
+namespace App\Repository;
+
+use App\Interfaces\InvoiceRepositoryInterface;
+use App\Models\Invoice;
+
+class InvoiceRepository implements InvoiceRepositoryInterface
+{
+    public function all()
+    {
+        return Invoice::all();
+    }
+    public function findById(int $id)
+    {
+        return Invoice::with('contract')->findOrFail($id);
+    }
+     public function create(array $data)
+     {
+      
+        return Invoice::create($data);
+     }
+     public function update(int $id, array $data)
+     {
+        return Invoice::findOrFail($id)->update($data);
+     }
+     public function delete(int $id)
+     {
+        return Invoice::findOrFail($id)->delete();
+     }
+     public function getByContractId(int $contractId)
+     {
+      dd(Invoice::where('contract_id', $contractId)->with('contract')->with('payments')->paginate(10));
+        return Invoice::where('contract_id', $contractId)->with('contract')->with('payments')->paginate(10);
+     }
+     public function getRemainingBalance(int $invoiceId)
+     {
+        $invoice = Invoice::findOrFail($invoiceId);
+        return $invoice->total - $invoice->payments()->sum('amount');
+     }
+     public function updateStatus(int $invoiceId, string $status)
+     {
+        Invoice::findOrFail($invoiceId)->update(['status' => $status]);
+     }
+     public function getpaidAmount(int $invoiceId)
+     {
+        return Invoice::findOrFail($invoiceId)->payments()->sum('amount');
+     }
+     public function getTotal(int $invoiceId)
+     {
+        return Invoice::findOrFail($invoiceId)->total;
+     }
+
+}
