@@ -135,7 +135,7 @@ class InvoiceController extends Controller
         }
         catch(\Exception $e){
             return response()->json([
-                'message'=>'Payment not created',
+                'message'=>$e->getMessage()
             ],400);
         }
        
