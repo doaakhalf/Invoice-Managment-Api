@@ -29,8 +29,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface
      }
      public function getByContractId(int $contractId)
      {
-      dd(Invoice::where('contract_id', $contractId)->with('contract')->with('payments')->paginate(10));
-        return Invoice::where('contract_id', $contractId)->with('contract')->with('payments')->paginate(10);
+      
+        return Invoice::where('contract_id', $contractId)->with('contract')->with('payments')->get();
      }
      public function getRemainingBalance(int $invoiceId)
      {
