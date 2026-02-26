@@ -37,9 +37,9 @@ class InvoiceRepository implements InvoiceRepositoryInterface
         $invoice = Invoice::findOrFail($invoiceId);
         return $invoice->total - $invoice->payments()->sum('amount');
      }
-     public function updateStatus(int $invoiceId, string $status)
+     public function updateStatus(Invoice $invoice, string $status)
      {
-        Invoice::findOrFail($invoiceId)->update(['status' => $status]);
+        $invoice->update(['status' => $status]);
      }
      public function getpaidAmount(int $invoiceId)
      {

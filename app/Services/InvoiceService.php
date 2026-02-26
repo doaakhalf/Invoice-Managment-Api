@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\DTOs\CreateInvoiceDTO;
 use App\DTOs\RecordPaymentDTO;
+use App\Exceptions\UnBalancePaymentAmount;
 use App\Interfaces\ContractRepositoryInterface;
 use App\Interfaces\InvoiceRepositoryInterface;
 use App\Models\Contract;
@@ -70,12 +71,9 @@ class InvoiceService {
       
         $invoice=$this->invoiceRepo->findById($dto->invoice_id);
    
-        if ($invoice->contract->status !== 'active') {
-            throw new \Exception('contract not active');
-        }
 
         if($dto->amount>$this->invoiceRepo->getRemainingBalance($dto->invoice_id)){
-            throw new \Exception('Payment amount is greater than remaining balance');
+            throw new UnBalancePaymentAmount('Payment amount is greater than remaining balance');
         }
 
         $invoicePaidAmount=$this->invoiceRepo->getpaidAmount($dto->invoice_id);
@@ -90,10 +88,10 @@ class InvoiceService {
             $invoicePaidAmount=$this->invoiceRepo->getpaidAmount($dto->invoice_id);
             $invoiceTotal=$this->invoiceRepo->getTotal($dto->invoice_id);
             if($invoicePaidAmount==$invoiceTotal){
-                $this->invoiceRepo->updateStatus($dto->invoice_id, 'paid');
+                $this->invoiceRepo->updateStatus($invoice, 'paid');
             }
             if($invoicePaidAmount<$invoiceTotal){
-                $this->invoiceRepo->updateStatus($dto->invoice_id, 'partially_paid');
+                $this->invoiceRepo->updateStatus($invoice, 'partially_paid');
             }
             DB::commit();
             

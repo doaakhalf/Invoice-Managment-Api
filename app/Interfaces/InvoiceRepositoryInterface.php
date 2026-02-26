@@ -2,6 +2,7 @@
 
 namespace App\Interfaces;
 
+use App\Models\Invoice;
 
 interface InvoiceRepositoryInterface{
 
@@ -12,7 +13,7 @@ interface InvoiceRepositoryInterface{
     public function delete(int $id);
     public function getByContractId(int $contractId);
     public function getRemainingBalance(int $invoiceId);
-    public function updateStatus(int $invoiceId, string $status);
+    public function updateStatus(Invoice $invoice, string $status);
     public function getpaidAmount(int $invoiceId);
     public function getTotal(int $invoiceId);
 }

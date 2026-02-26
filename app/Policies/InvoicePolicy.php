@@ -26,7 +26,7 @@ class InvoicePolicy
     public function create(User $user,Contract $contract): bool
     {
        
-        return $user->tenant_id === $contract->tenant_id && $contract->status==='active';
+        return $user->tenant_id === $contract->tenant_id ;
     }
 
       /**

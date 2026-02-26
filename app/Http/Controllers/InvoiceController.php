@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\DTOs\CreateInvoiceDTO;
 use App\DTOs\RecordPaymentDTO;
+use App\Exceptions\ContractNotActiveException;
 use App\Http\Requests\StoreInvoiceRequest;
 use App\Http\Requests\StorePaymentRequest;
 use App\Http\Resources\ContractSummaryResource;
@@ -57,9 +58,7 @@ class InvoiceController extends Controller
         }
       
         if($contract->status !== 'active'){
-            return response()->json([
-                'message'=>'Invoice not created | contract is not active',
-            ],400);
+            throw new ContractNotActiveException("Contract is not active");
         }
         try{
             $dto=CreateInvoiceDTO::formRequest($request,$contract);
@@ -135,7 +134,7 @@ class InvoiceController extends Controller
         }
         catch(\Exception $e){
             return response()->json([
-                'message'=>'Payment not created',
+                'message'=>$e->getMessage(),
             ],400);
         }
        
