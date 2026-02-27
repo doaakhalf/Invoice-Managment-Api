@@ -17,7 +17,7 @@ class InvoicePolicy
     {
         //
      
-        return $user->tenant_id === $invoice->contract->tenant_id;
+        return $user->id === $invoice->contract->tenant_id;
     }
 
     /**
@@ -26,7 +26,7 @@ class InvoicePolicy
     public function create(User $user,Contract $contract): bool
     {
        
-        return $user->tenant_id === $contract->tenant_id;
+        return $user->id === $contract->tenant_id;
     }
 
       /**
@@ -35,7 +35,7 @@ class InvoicePolicy
     public function recordPayment(User $user,Invoice $invoice): bool
     {
        
-            return ($user->tenant_id === $invoice->contract->tenant_id) && ($invoice->status!=='cancelled');
+            return ($user->id === $invoice->contract->tenant_id) && ($invoice->status!=='cancelled');
     }
  
    

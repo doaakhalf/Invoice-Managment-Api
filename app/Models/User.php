@@ -21,7 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'tenant_id'
+       
     ];
 
     /**
@@ -43,9 +43,5 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    
-    public function tenant()
-    {
-        return $this->belongsTo(User::class,'tenant_id','id');
-    }
+ 
 }
