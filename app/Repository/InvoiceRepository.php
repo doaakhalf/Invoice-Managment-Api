@@ -35,7 +35,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
      public function getRemainingBalance(int $invoiceId)
      {
         $invoice = Invoice::findOrFail($invoiceId);
-        return $invoice->total - $invoice->payments()->sum('amount');
+        return number_format( $invoice->total - $invoice->payments()->sum('amount'),2,'.', '');
      }
      public function updateStatus(int $invoiceId, string $status)
      {
