@@ -132,6 +132,10 @@ class InvoiceService {
        
         return $this->invoiceRepo->getByContractId($contractId);
     }
+    public function findById(int $invoiceId):Invoice { 
+       
+        return $this->invoiceRepo->findById($invoiceId);
+    }
 
 
     public function generateInvoiceNumber($tenant_id): string {
