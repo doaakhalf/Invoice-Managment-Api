@@ -11,13 +11,10 @@ use App\Http\Requests\StorePaymentRequest;
 use App\Http\Resources\ContractSummaryResource;
 use App\Http\Resources\InvoiceResource;
 use App\Http\Resources\PaymentResource;
-use App\Repository\InvoiceRepository;
 use App\Models\Contract;
 use App\Models\Invoice;
 use App\Services\InvoiceService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
