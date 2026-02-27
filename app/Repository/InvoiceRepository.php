@@ -35,7 +35,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface
      public function getRemainingBalance(int $invoiceId)
      {
      
-        $invoice = Invoice::findOrFail($invoiceId);
+        $invoice = $this->findById($invoiceId);
+        dd($invoice);
         return $invoice->total - $invoice->payments()->sum('amount');
      }
      public function updateStatus(Invoice $invoice, string $status)
@@ -44,11 +45,11 @@ class InvoiceRepository implements InvoiceRepositoryInterface
      }
      public function getpaidAmount(int $invoiceId)
      {
-        return Invoice::findOrFail($invoiceId)->payments()->sum('amount');
+        return $this->findById($invoiceId)->payments()->sum('amount');
      }
      public function getTotal(int $invoiceId)
      {
-        return Invoice::findOrFail($invoiceId)->total;
+        return $this->findById($invoiceId)->total;
      }
 
 }
