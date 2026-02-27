@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Casts\ContractStatus;
 use App\DTOs\CreateInvoiceDTO;
 use App\DTOs\RecordPaymentDTO;
 use App\Http\Requests\StoreInvoiceRequest;
@@ -56,7 +57,7 @@ class InvoiceController extends Controller
             ],404);
         }
       
-        if($contract->status !== 'active'){
+        if($contract->status !== ContractStatus::Active){
             return response()->json([
                 'message'=>'Invoice not created | contract is not active',
             ],400);
@@ -144,7 +145,8 @@ class InvoiceController extends Controller
     }
     public function getContractSummary(Contract $contract)
     {
-        $this->authorize('view',$contract);
+        
+        $this->authorize('getContractSummary',[Invoice::class,$contract]);
         if(!$contract){
             return response()->json([
                 'message'=>'Contract not found',

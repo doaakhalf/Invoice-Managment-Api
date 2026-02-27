@@ -1,6 +1,7 @@
 <?php
 namespace App\Repository;
 
+use App\Casts\InvoiceStatus;
 use App\Interfaces\InvoiceRepositoryInterface;
 use App\Models\Invoice;
 
@@ -37,7 +38,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface
         $invoice = Invoice::findOrFail($invoiceId);
         return number_format( $invoice->total - $invoice->payments()->sum('amount'),2,'.', '');
      }
-     public function updateStatus(int $invoiceId, string $status)
+     public function updateStatus(int $invoiceId, InvoiceStatus $status)
      {
         Invoice::findOrFail($invoiceId)->update(['status' => $status]);
      }
