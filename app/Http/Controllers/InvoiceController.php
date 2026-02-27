@@ -69,7 +69,7 @@ class InvoiceController extends Controller
                     'message'=>'Invoice not created',
                 ],400);
             }
-
+           
             return InvoiceResource::make($InvoiceData)->response()->setStatusCode(201);
         }
         catch(\Exception $e){

@@ -14,10 +14,14 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('invoice_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('tenant_id');
             $table->decimal('amount', 10, 2);
             $table->enum('payment_method', ['cash', 'bank_transfer','credit_card'])->default('cash');
             $table->string('reference_number');
             $table->date('paid_at');
+            $table->foreign('tenant_id')->references('id')->on('users')->cascadeOnDelete();
+
+
             $table->timestamps();
         });
     }

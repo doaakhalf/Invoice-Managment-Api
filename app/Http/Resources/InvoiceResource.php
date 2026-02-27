@@ -22,7 +22,7 @@ class InvoiceResource extends JsonResource
             'subtotal'=>$this->subtotal,
             'tax_amount'=>$this->tax_amount,
             'total'=>$this->total,
-            'status'=>$this->status,
+            'status'=>$this->status->value,
             'due_date'=>$this->due_date,
             'paid_at'=>$this->paid_at,
             'remaining_balance'=>$this->remaining_balance,

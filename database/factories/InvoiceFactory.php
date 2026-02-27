@@ -27,7 +27,8 @@ class InvoiceFactory extends Factory
             'status'=>fake()->randomElement(['pending', 'paid','partially_paid','overdue','cancelled']),
             'due_date'=>Date::now()->addDays(15)->format('Y-m-d'),
             'paid_at'=>Date::now()->addDays(15)->format('Y-m-d'),
-            'contract_id'=>fake()->numberBetween(1, 2)
+            'contract_id'=>fake()->numberBetween(1, 2),
+            'tenant_id'=>fake()->numberBetween(1, 3)
 
             
 

@@ -19,7 +19,7 @@ class InvoicePolicy
         //
       
      
-        return $user->id === $invoice->contract->tenant_id;
+        return $user->id === $invoice->tenant_id;
     }
 
     /**
@@ -37,7 +37,7 @@ class InvoicePolicy
     public function recordPayment(User $user,Invoice $invoice): bool
     {
        
-            return ($user->id === $invoice->contract->tenant_id) && ($invoice->status!==InvoiceStatus::Cancelled);
+            return ($user->id === $invoice->tenant_id) && ($invoice->status!==InvoiceStatus::Cancelled);
     }
     public function getContractSummary(User $user,Contract $contract): bool
     {

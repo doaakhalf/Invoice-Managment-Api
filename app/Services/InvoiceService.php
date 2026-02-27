@@ -51,6 +51,8 @@ class InvoiceService
         $calculatedValues['tax_amount'] = $tax_amount;
         $calculatedValues['paid_at'] = date('Y-m-d');
         $calculatedValues['subtotal'] = $subtotal;
+        $calculatedValues['status'] = InvoiceStatus::Pending;
+
 
         try {
             DB::beginTransaction();
