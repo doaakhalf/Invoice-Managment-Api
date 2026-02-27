@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Casts\InvoiceStatus;
 use App\Models\Invoice;
 use Illuminate\Support\Facades\Log;
 
@@ -21,7 +22,7 @@ class InvoiceObserver
     public function updated(Invoice $invoice): void
     {
         //
-        if($invoice->status=='paid'){
+        if($invoice->status==InvoiceStatus::Paid){
             Log::info('Invoice paid: ' . $invoice->id);
         }
     }

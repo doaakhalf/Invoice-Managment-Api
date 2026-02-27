@@ -19,9 +19,9 @@ class ContractSummaryResource extends JsonResource
         return [
 
             'contract_id'=>$this->contract_id,
-            'total_invoiced'=>$this->total_invoiced,
-            'total_paid'=>$this->total_paid,
-            'outstanding_balance'=>$this->outstanding_balance,
+            'total_invoiced'=>number_format($this->total_invoiced, 2, '.', ''),
+            'total_paid'=>number_format($this->total_paid, 2, '.', ''),
+            'outstanding_balance'=>number_format($this->outstanding_balance, 2, '.', ''),
             'invoices_count'=>$this->invoices_count,
             'latest_invoice_date'=>$this->latest_invoice_date
         ];

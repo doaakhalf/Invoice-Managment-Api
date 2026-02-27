@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Casts\InvoiceStatus;
 use App\Models\Contract;
 use App\Models\Invoice;
 use App\Models\User;
@@ -36,7 +37,12 @@ class InvoicePolicy
     public function recordPayment(User $user,Invoice $invoice): bool
     {
        
-            return ($user->id === $invoice->contract->tenant_id) && ($invoice->status!=='cancelled');
+            return ($user->id === $invoice->contract->tenant_id) && ($invoice->status!==InvoiceStatus::Cancelled);
+    }
+    public function getContractSummary(User $user,Contract $contract): bool
+    {
+       
+            return $user->id === $contract->tenant_id;
     }
  
    
