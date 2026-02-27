@@ -16,6 +16,7 @@ class InvoicePolicy
     public function view(User $user, Invoice $invoice): bool
     {
         //
+      
      
         return $user->id === $invoice->contract->tenant_id;
     }

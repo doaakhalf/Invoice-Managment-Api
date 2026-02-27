@@ -86,9 +86,10 @@ class InvoiceController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Invoice $invoice)
+    public function show($invoice_id)
     {
-        $this->authorize('view',$invoice);
+        $invoice=$this->invoiceService->findById($invoice_id);
+        $this->authorize('view',[Invoice::class,$invoice]);
         if(!$invoice){
             return response()->json([
                 'message'=>'Invoice not found',
