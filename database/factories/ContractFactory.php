@@ -23,7 +23,7 @@ class ContractFactory extends Factory
             'customer_name' => fake()->name(),
             'rent_amount' => fake()->randomFloat(2, 10, 1000),
             'status' => fake()->randomElement(['draft', 'active', 'expired', 'terminated']),
-            'tenant_id' => fake()->randomNumber(1,5),
+            'tenant_id' => fake()->randomNumber(1,4),
             'start_date' => fake()->date(),
             'end_date' => fake()->date(),
         ];

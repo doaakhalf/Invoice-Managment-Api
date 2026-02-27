@@ -54,9 +54,12 @@ class InvoiceService {
            try{
                 DB::beginTransaction();
                 $invoice=$this->invoiceRepo->create((array)$dto+$calculatedValues);
+               
                 DB::commit();
+                 
                 $remainingBalance=number_format($this->invoiceRepo->getRemainingBalance($invoice->id), 2, '.', '');
                 $invoice->remaining_balance=$remainingBalance;
+               
                 return $invoice;
            }catch(\Exception $e){
                 DB::rollBack();

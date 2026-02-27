@@ -25,7 +25,7 @@ class CreateInvoiceDTO{
         return new self(
         contract_id: $contract->id,
         due_date: date('Y-m-d', strtotime($request->validated('due_date'))),
-        tenant_id: $request->user()->tenant_id,
+        tenant_id: $request->user()->id,
        
        
         );

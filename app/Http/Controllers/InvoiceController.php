@@ -16,6 +16,7 @@ use App\Models\Invoice;
 use App\Services\InvoiceService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class InvoiceController extends Controller
 {
@@ -30,9 +31,12 @@ class InvoiceController extends Controller
     public function index(Contract $contract,Request $request)
     {
        
-       
+    //    DB::enableQueryLog();
         $invoices=$this->invoiceService->getByContractId($contract->id);
+        //  dd(DB::getQueryLog());
         return InvoiceResource::collection($invoices)->toArray($request);
+       
+       
         //
     }
 
