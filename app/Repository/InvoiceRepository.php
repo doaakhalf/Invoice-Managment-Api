@@ -36,8 +36,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface
      {
      
         $invoice = $this->findById($invoiceId);
-        dd($invoice);
-        return $invoice->total - $invoice->payments()->sum('amount');
+     
+        return number_format($invoice->total - $invoice->payments()->sum('amount'), 2, '.', '');
      }
      public function updateStatus(Invoice $invoice, string $status)
      {

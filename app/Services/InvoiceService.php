@@ -57,7 +57,7 @@ class InvoiceService {
                
                 DB::commit();
                  
-                $remainingBalance=number_format($this->invoiceRepo->getRemainingBalance($invoice->id), 2, '.', '');
+                $remainingBalance=$this->invoiceRepo->getRemainingBalance($invoice->id);
                 $invoice->remaining_balance=$remainingBalance;
                
                 return $invoice;
@@ -135,7 +135,9 @@ class InvoiceService {
     }
     public function findById(int $invoiceId):Invoice { 
        
-        return $this->invoiceRepo->findById($invoiceId);
+        $invoice=$this->invoiceRepo->findById($invoiceId);
+        $invoice->remaining_balance=$this->invoiceRepo->getRemainingBalance($invoiceId);
+        return $invoice;
     }
 
 
