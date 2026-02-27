@@ -6,7 +6,7 @@ use App\Casts\InvoiceStatus;
 use App\Models\Contract;
 use App\Models\Invoice;
 use App\Models\User;
-use Illuminate\Auth\Access\Response;
+
 
 class InvoicePolicy
 {
