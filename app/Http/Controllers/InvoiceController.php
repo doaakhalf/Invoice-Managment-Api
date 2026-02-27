@@ -29,8 +29,8 @@ class InvoiceController extends Controller
     public function index(Contract $contract,Request $request)
     {
        
-    //    DB::enableQueryLog();
-        $invoices=$this->invoiceService->getByContractId($contract->id);
+         $this->authorize('getContractSummary',[Invoice::class,$contract]);
+         $invoices=$this->invoiceService->getByContractId($contract->id);
         //  dd(DB::getQueryLog());
         return InvoiceResource::collection($invoices)->toArray($request);
        
@@ -70,7 +70,7 @@ class InvoiceController extends Controller
                     'message'=>'Invoice not created',
                 ],400);
             }
-
+           
             return InvoiceResource::make($InvoiceData)->response()->setStatusCode(201);
         }
         catch(\Exception $e){

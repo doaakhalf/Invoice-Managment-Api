@@ -18,11 +18,12 @@ class PaymentFactory extends Factory
     {
         $number = fake()->randomFloat(2, 10, 1000);
         return [
-            'invoice_id'=>fake()->numberBetween(1, 2),
+            'invoice_id'=>fake()->numberBetween(1, 4),
             'amount'=>number_format($number, 2, '.', ','),
             'payment_method'=>fake()->randomElement(['cash', 'bank_transfer','credit_card']),
             'reference_number'=>fake()->numberBetween(1, 1000),
             'paid_at'=>fake()->date('Y-m-d'),
+            'tenant_id'=>fake()->numberBetween(1, 3),
             //
         ];
     }

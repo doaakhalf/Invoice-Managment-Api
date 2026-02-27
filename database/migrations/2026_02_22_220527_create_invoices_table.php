@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('contract_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('tenant_id');
             $table->string('invoice_number');
             $table->decimal('subtotal', 10, 2);
             $table->decimal('tax_amount', 10, 2);
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->enum('status', ['pending', 'paid','partially_paid','overdue','cancelled'])->default('pending');
             $table->date('due_date');
             $table->date('paid_at');
+            $table->foreign('tenant_id')->references('id')->on('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -11,15 +11,18 @@ class RecordPaymentDTO{
     public readonly float $amount;
     public readonly string $payment_method;
     public readonly string $reference_number;
+    public readonly string $tenant_id;
+
     
    
 
-    public function __construct(int $invoice_id, float $amount,string $payment_method,string $reference_number)
+    public function __construct(int $invoice_id, float $amount,string $payment_method,string $reference_number,string $tenant_id)
     {
         $this->invoice_id = $invoice_id;
         $this->amount = $amount;
         $this->payment_method = $payment_method;
         $this->reference_number = $reference_number;
+        $this->tenant_id = $tenant_id;
     
     }
 
@@ -30,7 +33,8 @@ class RecordPaymentDTO{
             amount:$request->validated('amount'),
             payment_method:$request->validated('payment_method'),
             reference_number:$request->validated('reference_number'),
-        );
+            tenant_id:$invoice->tenant_id,
+            );
  }
 
 
