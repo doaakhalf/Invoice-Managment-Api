@@ -29,7 +29,7 @@ class InvoiceController extends Controller
     public function index(Contract $contract,Request $request)
     {
        
-       
+         $this->authorize('getContractSummary',[Invoice::class,$contract]);
         $invoices=$this->invoiceService->getByContractId($contract->id);
         return InvoiceResource::collection($invoices)->toArray($request);
         //
